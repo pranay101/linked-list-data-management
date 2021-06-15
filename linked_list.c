@@ -20,6 +20,7 @@ typedef struct node Node;
 Node* createNode(int number,char* name,char* phone, char* email)
 {
     Node *temp= malloc(sizeof(Node));
+    Node *temp_1= malloc(sizeof(Node));
     //check if pointer is null
     if (temp == NULL)
     {
@@ -31,8 +32,9 @@ Node* createNode(int number,char* name,char* phone, char* email)
     strcpy(temp->name,name);
     strcpy(temp->email,email);
     strcpy(temp->phone,phone);
+    temp_1 = temp;
     temp->next=NULL;
-    return temp; //returns a pointer to a node with data and NUll pointer
+    return temp_1; //returns a pointer to a node with data and NUll pointer
 }
 
 
@@ -147,7 +149,7 @@ void destroy_ll(Node *head)
 
 void modifycontact(Node* head)   
 {
-    int record, result;
+    int record;
     Node* temp = head;
     if(head == NULL)
     {
@@ -181,3 +183,5 @@ int findcontact(Node* head) /* find contact function*/
     printf("contact %s was not found!\n",buff);
           return 1;
 }   
+
+

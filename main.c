@@ -3,6 +3,10 @@
 #include <ctype.h>
 #include <stdbool.h>
 
+
+// function to test the program
+#include "test.h"
+
 #include "linked_list.h"
 
 /*  READ ME
@@ -17,32 +21,59 @@
 
 */
 
+
+// Utility Function 
+
+void hold_for_enter()
+{
+    char enter  = getchar();
+    enter = getchar();
+}
+
+
+void red(){
+  printf("\033[1;31m");
+}
+
+void green() {
+  printf("\033[0;32m");
+}
+
+void reset(void) {
+  printf("\033[0m");
+}
+
 int main(void)
 {
     Node* head = NULL;
     char ch;
+    char enter;
+
     
     while(true)
     {   
-        puts(" -------------------------------");
-        printf("|\t\t\t\t|\n|\tP to print all contact\t|\n|\tD to delete contact\t|\n|\tA to add new contact\t|\n|\tQ to save and quit\t|\n");
-        puts(" -------------------------------\nEnter: ");
-        ch = tolower(getchar());
-        getchar(); // eat the trailing newline
+        // system("cls");
+        puts("\n -------------------------------");
+        printf("|\t\t\t\t|\n|\tP to print all contact\t|\n|\tD to delete contact\t|\n|\tA to add new contact\t|\n|\tQ to save and quit\t|\n|\tT to run tests\t|\n");
+        puts(" -------------------------------\nEnter: "); ch = tolower(getchar());
 
         switch (ch)
         {
         case 'p':
-            if (head == NULL){
+        {    if (head == NULL)
+            {
                 printf("Sorry, 0 contact found\n");
                 getchar();  //get char to from user to continue
             }
-            else{
+            else
+            {
                 Traverse(head);
             }
             break;
-        
-        case 'a': ;
+        }
+        case 'a': 
+        {   
+            printf("inside insert");
             int number;        /*unique account number*/
             char name[20];     /*contains name*/  
             char phone[15];    /*contains phone number*/
@@ -65,13 +96,14 @@ int main(void)
             {
                 head = createNode(number,name,phone,email);
             }
-            else{
-                insert(number,name,email,phone,head);
+            else
+            {
+                head = insert(number,name,email,phone,head);
             }
             break;
-        
-        case 'd': ;
-            int z;
+        }
+        case 'd': 
+           { int z;
             if (head == NULL)
             {
                 printf("contact list empty.\n");
@@ -82,16 +114,32 @@ int main(void)
                 Traverse(head);
                 printf("Enter ID number to delete: ");
                 scanf("%i",&z);
-                DELETE(z,head);
+                head = DELETE(z,head);
                 printf("\nID: %i Deleted successfully\n");
             }
             break;
-
+        }
         case 'q':
-            printf("\nclosing...");
+        {   printf("\nclosing...");
             return 0;
             break;
-
+        }
+        case 't':
+        {
+            printf("\n Running test 1 ");
+            int test_result = test_create_node();
+            if (test_result == 1)
+            {
+                printf("\n Test 1 passed.. !!");
+                hold_for_enter();
+            }
+            else
+            {
+                printf("/n/t Code failed at test 1 !!");
+                printf("/n/t Exit Code Status: %d", test_result);
+            }
+            break;
+        }
         case '\n':
             break;
 
