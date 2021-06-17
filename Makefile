@@ -9,3 +9,7 @@ compile: linked_list.c linked_list.h
 
 clean:
 	rm *.o main *.exe
+
+test:
+	 gcc test.c  -g -Wall -o test
+	 ./test
